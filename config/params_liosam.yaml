@@ -20,7 +20,7 @@ lio_sam:
   
   # Export settings
   savePCD: true                              # https://github.com/TixiaoShan/LIO-SAM/issues/3
-  savePCDDirectory: "/home/user/Desktop/scliosam/data/"  # use global path, and end with "/" 
+  savePCDDirectory: "/home/root/scliosam/data/"  # use global path, and end with "/" 
     # warning: if you have already data in the above savePCDDirectory, it will all remove and remake them. Thus, backup is recommended if pre-made data exist. 
 
   # Sensor Settings
@@ -47,12 +47,6 @@ lio_sam:
   extrinsicRPY: [1,  0, 0,
                  0, 1, 0,
                   0, 0, 1]
-  # extrinsicRot: [1, 0, 0,
-  #                 0, 1, 0,
-  #                 0, 0, 1]
-  # extrinsicRPY: [1, 0, 0,
-  #                 0, 1, 0,
-  #                 0, 0, 1]
 
   # LOAM feature threshold
   edgeThreshold: 1.0
