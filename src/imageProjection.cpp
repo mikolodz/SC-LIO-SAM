@@ -238,7 +238,8 @@ public:
                 dst.y = src.y;
                 dst.z = src.z;
                 dst.intensity = src.intensity;
-                dst.ring = src.ring;
+                // dst.ring = src.ring;
+                dst.ring = (src.ring) ? src.ring : (i % N_SCAN) + 1;
                 dst.time = src.t * 1e-9f;
             }
         }
@@ -289,11 +290,12 @@ public:
                     break;
                 }
             }
-            if (ringFlag == -1)
-            {
-                ROS_ERROR("Point cloud ring channel not available, please configure your point cloud data!");
-                ros::shutdown();
-            }
+            // Ring check doesn't throw errors
+            // if (ringFlag == -1)
+            // {
+            //     ROS_ERROR("Point cloud ring channel not available, please configure your point cloud data!");
+            //     ros::shutdown();
+            // }
         }
 
         // check point time
@@ -557,8 +559,8 @@ public:
         for (int i = 0; i < cloudSize; ++i)
         {
             PointType thisPoint;
-            thisPoint.x = laserCloudIn->points[i].x;
-            thisPoint.y = laserCloudIn->points[i].y;
+            thisPoint.x = -laserCloudIn->points[i].x;
+            thisPoint.y = -laserCloudIn->points[i].y;
             thisPoint.z = laserCloudIn->points[i].z;
             thisPoint.intensity = laserCloudIn->points[i].intensity;
 
@@ -566,6 +568,7 @@ public:
             if (range < lidarMinRange || range > lidarMaxRange)
                 continue;
 
+            
             int rowIdn = laserCloudIn->points[i].ring;
             // int rowIdn = (i % 64) + 1 ; // for MulRan dataset, Ouster OS1-64 .bin file,  giseop 
 
